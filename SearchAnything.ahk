@@ -1,4 +1,5 @@
 ﻿; Created by Asger Juul Brunshøj
+; Modified by April Hickson
 
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 ; #Warn  ; Enable warnings to assist with detecting common errors.
@@ -16,7 +17,7 @@ SetCapsLockState, AlwaysOff
 ; section in a function or subroutine which is then
 ; executed below.
 ;-------------------------------------------------------
-Gosub, gui_autoexecute
+Gosub, GuiSetup
 ;-------------------------------------------------------
 ; END AUTO EXECUTE SECTION
 return

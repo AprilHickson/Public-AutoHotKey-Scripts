@@ -1,4 +1,5 @@
 ﻿; Created by Asger Juul Brunshøj
+; Modified by April Hickson
 
 ; Note: Save with encoding UTF-8 with BOM if possible.
 ; I had issues with special characters like in ¯\_(ツ)_/¯ that wouldn't work otherwise.
@@ -8,7 +9,7 @@
 ;-------------------------------------------------------------------------------
 ; AUTO EXECUTE
 ;-------------------------------------------------------------------------------
-gui_autoexecute:
+GuiSetup:
     ; Tomorrow Night Color Definitions:
     cBackground := "c" . "1d1f21"
     cCurrentLine := "c" . "282a2e"
@@ -37,11 +38,11 @@ gui_autoexecute:
 ; LAUNCH GUI
 ;-------------------------------------------------------------------------------
 CapsLock & Space::
-gui_spawn:
+GuiCreate:
     if gui_state != closed
     {
         ; If the GUI is already open, close it.
-        gui_destroy()
+        GuiClose()
         return
     }
 
@@ -51,9 +52,9 @@ gui_spawn:
     Gui, Color, 1d1f21, 282a2e
     Gui, +AlwaysOnTop -SysMenu +ToolWindow -caption +Border
     Gui, Font, s11, Segoe UI
-    Gui, Add, Text, %gui_control_options% vgui_main_title, ¯\_(ツ)_/¯
+    Gui, Add, Text, %gui_control_options% vgui_main_title, WWYLTD
     Gui, Font, s10, Segoe UI
-    Gui, Add, Edit, %gui_control_options% vPedersen gFindus
+    Gui, Add, Edit, %gui_control_options% vPedersen gTextUpdated
     Gui, Show,, myGUI
     return
 
@@ -62,20 +63,21 @@ gui_spawn:
 ;-------------------------------------------------------------------------------
 ; Automatically triggered on Escape key:
 GuiEscape:
-    gui_destroy()
+    GuiClose()
     return
 
 ; The callback function when the text changes in the input field.
-Findus:
+TextUpdated:
     Gui, Submit, NoHide
-    #Include %A_ScriptDir%\GUI\UserCommands.ahk
+    #Include %A_ScriptDir%\UserCommands.ahk
+    #Include %A_ScriptDir%\PrivateCommands.ahk
     return
 
 ;
-; gui_destroy: Destroy the GUI after use.
+; GuiClose: Destroy the GUI after use.
 ;
 #WinActivateForce
-gui_destroy() {
+GuiClose() {
     global gui_state
     global gui_search_title
 
@@ -141,7 +143,7 @@ gui_search(url) {
 
 gui_SearchEnter:
     Gui, Submit
-    gui_destroy()
+    GuiClose()
     query_safe := uriEncode(gui_SearchEdit)
     Loop, %search_urls%
     {

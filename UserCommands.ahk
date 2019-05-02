@@ -80,48 +80,48 @@ else if Pedersen = / ; Go to subreddit. This is a quick way to navigate to a spe
 }
 else if Pedersen = face ; facebook.com
 {
-    gui_destroy()
+    GuiClose()
     run www.facebook.com
 }
 else if Pedersen = red ; reddit.com
 {
-    gui_destroy()
+    GuiClose()
     run www.reddit.com
 }
 else if Pedersen = cal ; Google Calendar
 {
-    gui_destroy()
+    GuiClose()
     run https://www.google.com/calendar
 }
 else if Pedersen = note ; Notepad
 {
-    gui_destroy()
+    GuiClose()
     Run Notepad
 }
 else if Pedersen = paint ; MS Paint
 {
-    gui_destroy()
+    GuiClose()
     run "C:\Windows\system32\mspaint.exe"
 }
 else if Pedersen = maps ; Google Maps focused on the Technical University of Denmark, DTU
 {
-    gui_destroy()
+    GuiClose()
     run "https://www.google.com/maps/@55.7833964`,12.5244754`,12z"
 }
 else if Pedersen = inbox ; Open google inbox
 {
-    gui_destroy()
+    GuiClose()
     run https://inbox.google.com/u/0/
     ; run https://mail.google.com/mail/u/0/#inbox  ; Maybe you prefer the old gmail
 }
 else if Pedersen = mes ; Opens Facebook unread messages
 {
-    gui_destroy()
+    GuiClose()
     run https://www.facebook.com/messages?filter=unread&action=recent-messages
 }
 else if Pedersen = url ; Open an URL from the clipboard (naive - will try to run whatever is in the clipboard)
 {
-    gui_destroy()
+    GuiClose()
     run %ClipBoard%
 }
 
@@ -131,22 +131,22 @@ else if Pedersen = url ; Open an URL from the clipboard (naive - will try to run
 ;-------------------------------------------------------------------------------
 else if Pedersen = rel ; Reload this script
 {
-    gui_destroy() ; removes the GUI even when the reload fails
+    GuiClose() ; removes the GUI even when the reload fails
     Reload
 }
 else if Pedersen = dir ; Open the directory for this script
 {
-    gui_destroy()
+    GuiClose()
     Run, %A_ScriptDir%
 }
 else if Pedersen = host ; Edit host script
 {
-    gui_destroy()
+    GuiClose()
     run, notepad.exe "%A_ScriptFullPath%"
 }
 else if Pedersen = user ; Edit GUI user commands
 {
-    gui_destroy()
+    GuiClose()
     run, notepad.exe "%A_ScriptDir%\GUI\UserCommands.ahk"
 }
 
@@ -156,32 +156,32 @@ else if Pedersen = user ; Edit GUI user commands
 ;-------------------------------------------------------------------------------
 else if Pedersen = @ ; Email address
 {
-    gui_destroy()
+    GuiClose()
     Send, my_email_address@gmail.com
 }
 else if Pedersen = name ; My name
 {
-    gui_destroy()
+    GuiClose()
     Send, My Full Name
 }
 else if Pedersen = phone ; My phone number
 {
-    gui_destroy()
+    GuiClose()
     SendRaw, +45-12345678
 }
 else if Pedersen = int ; LaTeX integral
 {
-    gui_destroy()
+    GuiClose()
     SendRaw, \int_0^1  \; \mathrm{d}x\,
 }
 else if Pedersen = logo ; ¯\_(ツ)_/¯
 {
-    gui_destroy()
+    GuiClose()
     Send ¯\_(ツ)_/¯
 }
 else if Pedersen = clip ; Paste clipboard content without formatting
 {
-    gui_destroy()
+    GuiClose()
     SendRaw, %ClipBoard%
 }
 
@@ -191,17 +191,17 @@ else if Pedersen = clip ; Paste clipboard content without formatting
 ;-------------------------------------------------------------------------------
 else if Pedersen = down ; Downloads
 {
-    gui_destroy()
+    GuiClose()
     run C:\Users\%A_Username%\Downloads
 }
 else if Pedersen = drop ; Dropbox folder (works when it is in the default directory)
 {
-    gui_destroy()
+    GuiClose()
     run, C:\Users\%A_Username%\Dropbox\
 }
 else if Pedersen = rec ; Recycle Bin
 {
-    gui_destroy()
+    GuiClose()
     Run ::{645FF040-5081-101B-9F08-00AA002F954E}
 }
 
@@ -211,24 +211,24 @@ else if Pedersen = rec ; Recycle Bin
 ;-------------------------------------------------------------------------------
 else if Pedersen = ping ; Ping Google
 {
-    gui_destroy()
+    GuiClose()
     Run, cmd /K "ping www.google.com"
 }
 else if Pedersen = hosts ; Open hosts file in Notepad
 {
-    gui_destroy()
+    GuiClose()
     Run notepad.exe C:\Windows\System32\drivers\etc\hosts
 }
 else if Pedersen = date ; What is the date?
 {
-    gui_destroy()
+    GuiClose()
     FormatTime, date,, LongDate
     MsgBox %date%
     date =
 }
 else if Pedersen = week ; Which week is it?
 {
-    gui_destroy()
+    GuiClose()
     FormatTime, weeknumber,, YWeek
     StringTrimLeft, weeknumbertrimmed, weeknumber, 4
     if (weeknumbertrimmed = 53)

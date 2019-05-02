@@ -32,13 +32,13 @@ My own personal `UserCommands.ahk` file is huge, but it is tailored to the thing
 ##### How to write your own commands
 The variable `Pedersen` contains your text from the input field.
 
-The first thing to do is often to hide the GUI and reset the input field. Do this by calling `gui_destroy()`.
+The first thing to do is often to hide the GUI and reset the input field. Do this by calling `GuiClose()`.
 
 After that, you can run any normal AHK block of code. If for example you have some program you use all the time, you can create a shortcut to that program by
 
     else if Pedersen = prog
     {
-        gui_destroy()
+        GuiClose()
         run "C:\Program Files\Company\That awesome program.exe"
     }
 
@@ -65,7 +65,7 @@ Disclaimer: Initially, this was not really written to be shared or used by other
 
 Here are some quick tips about the script and how it works:
 
-##### Function `gui_destroy()`
+##### Function `GuiClose()`
 Hides and resets the GUI window.
 
 ##### Function `gui_search(url)`
