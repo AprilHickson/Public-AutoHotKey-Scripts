@@ -54,7 +54,7 @@ GuiCreate:
     Gui, Font, s11, Segoe UI
     Gui, Add, Text, %gui_control_options% vgui_main_title, WWYLTD
     Gui, Font, s10, Segoe UI
-    Gui, Add, Edit, %gui_control_options% vPedersen gTextUpdated
+    Gui, Add, Edit, %gui_control_options% vSearchText gTextUpdated
     Gui, Show,, myGUI
     return
 
@@ -69,8 +69,8 @@ GuiEscape:
 ; The callback function when the text changes in the input field.
 TextUpdated:
     Gui, Submit, NoHide
-    #Include %A_ScriptDir%\UserCommands.ahk
-    #Include %A_ScriptDir%\PrivateCommands.ahk
+    #Include %A_ScriptDir%\Commands\UserCommands.ahk
+    #Include %A_ScriptDir%\Commands\PrivateCommands.ahk
     return
 
 ;
@@ -96,7 +96,7 @@ GuiClose() {
     WinActivate
 }
 
-gui_change_title(message,color = "") {
+GuiUpdateTitle(message,color = "") {
     ; If parameter color is omitted, the message is assumed to be an error
     ; message, and given the color red.
     If color =
@@ -110,6 +110,21 @@ gui_change_title(message,color = "") {
     Gui, Font, s10 cffffff ; reset
 }
 
+GuiExtraInfo(extraInfoWord, command) {
+    global
+    Gui, Add, Text, %gui_control_options% %cYellow%, %extraInfoWord%
+    Gui, Add, Edit, %gui_control_options% vGuiExtraInfoText gGuiExtraInfoEntered
+    GuiControl, Disable, SearchText
+    Gui, Show, AutoSize
+    return
+}
+
+GuiExtraInfoEntered:
+    param = func("OpenInVisualStudio")
+    %param%
+    return
+
+
 ;-------------------------------------------------------------------------------
 ; SEARCH ENGINES
 ;-------------------------------------------------------------------------------
@@ -120,7 +135,7 @@ gui_search_add_elements:
     Gui, Add, Text, %gui_control_options% %cYellow%, %gui_search_title%
     Gui, Add, Edit, %gui_control_options% %cYellow% vgui_SearchEdit -WantReturn
     Gui, Add, Button, x-10 y-10 w1 h1 +default ggui_SearchEnter ; hidden button
-    GuiControl, Disable, Pedersen
+    GuiControl, Disable, SearchText
     Gui, Show, AutoSize
     return
 
@@ -174,12 +189,12 @@ gui_commandlibrary:
     StringCaseSense, Off ; Matching to both if/If in the IfInString command below
     Loop, read, %A_ScriptDir%/GUI/UserCommands.ahk
     {
-        ; search for the string If Pedersen =, but search for each word individually because spacing between words might not be consistent. (might be improved with regex)
+        ; search for the string If SearchText =, but search for each word individually because spacing between words might not be consistent. (might be improved with regex)
         If Substr(A_LoopReadLine, 1, 1) != ";" ; Do not display commented commands
         {
             If A_LoopReadLine contains if
             {
-                IfInString, A_LoopReadLine, Pedersen
+                IfInString, A_LoopReadLine, SearchText
                     IfInString, A_LoopReadLine, =
                     {
                         StringGetPos, setpos, A_LoopReadLine,=

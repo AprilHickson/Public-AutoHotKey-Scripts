@@ -30,13 +30,13 @@ There are some additional example commands included. Try typing simply `?`, and 
 My own personal `UserCommands.ahk` file is huge, but it is tailored to the things I do everyday and would not be much use for anybody else.
 
 ##### How to write your own commands
-The variable `Pedersen` contains your text from the input field.
+The variable `SearchText` contains your text from the input field.
 
 The first thing to do is often to hide the GUI and reset the input field. Do this by calling `GuiClose()`.
 
 After that, you can run any normal AHK block of code. If for example you have some program you use all the time, you can create a shortcut to that program by
 
-    else if Pedersen = prog
+    else if SearchText = prog
     {
         GuiClose()
         run "C:\Program Files\Company\That awesome program.exe"
@@ -52,7 +52,7 @@ There is a function, `gui_search(url)`, defined in this script that you can call
 * Replace your query with the word `REPLACEME`. Like this: `https://translate.google.com/#en/ko/REPLACEME`.
 * Then the code could be:
 
-        else if Pedersen = kor ; Translate English to Korean
+        else if SearchText = kor ; Translate English to Korean
         {
             gui_search_title = English to Korean
             gui_search("https://translate.google.com/#en/ko/REPLACEME")
@@ -74,7 +74,7 @@ Then it will look at the supplied URL and find 'REPLACEME' and replace it
 with your search query.
 Example:
 
-    else if Pedersen = y%A_Space% ; Search Youtube
+    else if SearchText = y%A_Space% ; Search Youtube
     {
         gui_search_title = Youtube
         gui_search("https://www.youtube.com/results?search_query=REPLACEME")
@@ -92,7 +92,7 @@ The english to korean Google Translate example does not currently work on the co
 ##### December 30. 2015:
 Most significant change is to `url_search(url)` as a consequence of a re-introduced feature: Ability to search multiple URLs. Searching multiple URLs is now possible as so:
 
-    else if Pedersen = m%A_Space% ; Open more than one URL
+    else if SearchText = m%A_Space% ; Open more than one URL
     {
         gui_search_title = multiple
         gui_search("https://www.google.com/search?&q=REPLACEME")
